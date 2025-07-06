@@ -1,6 +1,5 @@
 import networkx as nx
 import os
-import zipfile
 import mlflow
 from fairops.mlops.autolog import LoggerFactory
 from cellmaps_ppi_embedding.runner import Node2VecEmbeddingGenerator, EmbeddingGenerator

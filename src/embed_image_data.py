@@ -1,7 +1,6 @@
 from cellmaps_image_embedding.runner import CellmapsImageEmbedder, EmbeddingGenerator
 from cellmaps_image_embedding.runner import DensenetEmbeddingGenerator
 import os
-import zipfile
 import mlflow
 from fairops.mlops.autolog import LoggerFactory
 

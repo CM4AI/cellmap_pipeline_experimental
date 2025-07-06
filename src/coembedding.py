@@ -1,7 +1,6 @@
 import mlflow
 from fairops.mlops.autolog import LoggerFactory
 import os
-import zipfile
 from cellmaps_coembedding.runner import EmbeddingGenerator, ProteinGPSCoEmbeddingGenerator
 from cellmaps_coembedding.runner import MuseCoEmbeddingGenerator
 from cellmaps_coembedding.runner import CellmapsCoEmbedder
