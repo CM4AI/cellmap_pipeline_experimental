@@ -19,6 +19,6 @@ def log_artifact_directory(dir_path, ignore_path=None):
     dir_path = os.path.abspath(dir_path)
     for root, _, files in os.walk(dir_path):
         for file in files:
-            if ignore_path is not None and ignore_path in file:
+            if ignore_path is not None and ignore_path in root:
                 continue
             mlflow.log_artifact(os.path.join(root, file), "rocrate")
