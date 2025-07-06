@@ -6,7 +6,6 @@ from cellmaps_generate_hierarchy.runner import CellmapsGenerateHierarchy
 import mlflow
 from fairops.mlops.autolog import LoggerFactory
 import os
-import zipfile
 
 
 def get_run_uri(run_id):
@@ -28,28 +27,11 @@ def log_artifact_directory(dir_path):
             for file in files:
                 mlflow.log_artifact(os.path.join(root, file), "rocrate")
 
-def zip_directory(dir_path):
-    dir_path = os.path.abspath(dir_path)
-    parent_dir, dir_name = os.path.split(dir_path)
-    zip_filename = os.path.join(dir_path, f"{dir_name}.zip")
-
-    with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
-        for root, _, files in os.walk(dir_path):
-            for file in files:
-                # Skip the zip file if it's already in the directory
-                if file == f"{dir_name}.zip":
-                    continue
-                abs_file = os.path.join(root, file)
-                rel_path = os.path.relpath(abs_file, dir_path)
-                zipf.write(abs_file, arcname=rel_path)
-
-    return zip_filename
-
 mlflow.set_experiment("hierarchy")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
 
-coembed_run_id = "eba5f62308a444678532f2c864f9f3f2"
+coembed_run_id = "b0188b90ebd6450894f7d9c6fd130e96"
 coembed_dir = f"data/embedding/coembed/{coembed_run_id}"
 
 configs = [{

@@ -26,28 +26,11 @@ def log_artifact_directory(dir_path):
             for file in files:
                 mlflow.log_artifact(os.path.join(root, file), "rocrate")
 
-def zip_directory(dir_path):
-    dir_path = os.path.abspath(dir_path)
-    parent_dir, dir_name = os.path.split(dir_path)
-    zip_filename = os.path.join(dir_path, f"{dir_name}.zip")
-
-    with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
-        for root, _, files in os.walk(dir_path):
-            for file in files:
-                # Skip the zip file if it's already in the directory
-                if file == f"{dir_name}.zip":
-                    continue
-                abs_file = os.path.join(root, file)
-                rel_path = os.path.relpath(abs_file, dir_path)
-                zipf.write(abs_file, arcname=rel_path)
-
-    return zip_filename
-
 mlflow.set_experiment("coembedding")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
-img_embed_id = "32313ce7640d445ba44b36e2cfc8458f"
-ppi_embed_id = "06be5e54aafe491e93178f5881877332"
+img_embed_id = "55a72e22d8094436bdb88ddf6cfef081"
+ppi_embed_id = "425a708b21984258961b4927a0d9d0ff"
 
 base_path = "data/embedding"
 img_emb_path = f"data/embedding/images/{img_embed_id}"
