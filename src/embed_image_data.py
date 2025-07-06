@@ -1,22 +1,13 @@
 import os
 
 import mlflow
+from mlops_helper import log_artifact_directory
 
 from cellmaps_image_embedding.runner import (CellmapsImageEmbedder,
                                              DensenetEmbeddingGenerator,
                                              EmbeddingGenerator)
 from fairops.mlops.autolog import LoggerFactory
 
-
-def log_artifact_directory(dir_path):
-    dir_path = os.path.abspath(dir_path)
-    parent_dir, dir_name = os.path.split(dir_path)
-    for root, _, files in os.walk(dir_path):
-            for file in files:
-                if file == f"{dir_name}.zip" or 'resize' in file:
-                    continue
-
-                mlflow.log_artifact(os.path.join(root, file), "rocrate")
 
 mlflow.set_experiment("image_embedding")
 ml_logger = LoggerFactory.get_logger("mlflow")
@@ -53,7 +44,7 @@ with mlflow.start_run() as parent_run:
 
             img_embedder.run()
 
-            embed_rocrate_path = log_artifact_directory(out_dir)
+            embed_rocrate_path = log_artifact_directory(out_dir, "resize")
 
             ml_logger.export_logs_as_artifact()
             mlflow.end_run()

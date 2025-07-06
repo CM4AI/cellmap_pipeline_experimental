@@ -2,19 +2,13 @@ import os
 
 import mlflow
 import networkx as nx
+from mlops_helper import log_artifact_directory
 
 from cellmaps_ppi_embedding.runner import (CellMapsPPIEmbedder,
                                            EmbeddingGenerator,
                                            Node2VecEmbeddingGenerator)
 from fairops.mlops.autolog import LoggerFactory
 
-
-def log_artifact_directory(dir_path):
-    dir_path = os.path.abspath(dir_path)
-    parent_dir, dir_name = os.path.split(dir_path)
-    for root, _, files in os.walk(dir_path):
-            for file in files:
-                mlflow.log_artifact(os.path.join(root, file), "rocrate")
 
 mlflow.set_experiment("ppi_embedding")
 ml_logger = LoggerFactory.get_logger("mlflow")
