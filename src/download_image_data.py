@@ -1,10 +1,11 @@
 import json
 
-from cellmaps_imagedownloader.runner import MultiProcessImageDownloader
-from cellmaps_imagedownloader.runner import CellmapsImageDownloader
 from cellmaps_imagedownloader.gene import ImageGeneNodeAttributeGenerator
-from cellmaps_imagedownloader.proteinatlas import ProteinAtlasReader, ProteinAtlasImageUrlReader, ImageDownloadTupleGenerator
-
+from cellmaps_imagedownloader.proteinatlas import (ImageDownloadTupleGenerator,
+                                                   ProteinAtlasImageUrlReader,
+                                                   ProteinAtlasReader)
+from cellmaps_imagedownloader.runner import (CellmapsImageDownloader,
+                                             MultiProcessImageDownloader)
 
 json_prov = None
 with open("examples/provenance.json", 'r') as f:

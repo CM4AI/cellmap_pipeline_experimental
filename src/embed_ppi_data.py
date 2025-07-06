@@ -1,9 +1,12 @@
-import networkx as nx
 import os
+
 import mlflow
+import networkx as nx
+
+from cellmaps_ppi_embedding.runner import (CellMapsPPIEmbedder,
+                                           EmbeddingGenerator,
+                                           Node2VecEmbeddingGenerator)
 from fairops.mlops.autolog import LoggerFactory
-from cellmaps_ppi_embedding.runner import Node2VecEmbeddingGenerator, EmbeddingGenerator
-from cellmaps_ppi_embedding.runner import CellMapsPPIEmbedder
 
 
 def log_artifact_directory(dir_path):

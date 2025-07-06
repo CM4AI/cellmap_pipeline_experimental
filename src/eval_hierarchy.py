@@ -1,7 +1,9 @@
-from cellmaps_hierarchyeval.runner import CellmapshierarchyevalRunner
-import mlflow
-from fairops.mlops.autolog import LoggerFactory
 import os
+
+import mlflow
+
+from cellmaps_hierarchyeval.runner import CellmapshierarchyevalRunner
+from fairops.mlops.autolog import LoggerFactory
 
 
 def get_run_uri(run_id):

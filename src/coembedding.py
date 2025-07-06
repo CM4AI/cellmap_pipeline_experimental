@@ -1,9 +1,12 @@
-import mlflow
-from fairops.mlops.autolog import LoggerFactory
 import os
-from cellmaps_coembedding.runner import EmbeddingGenerator, ProteinGPSCoEmbeddingGenerator
-from cellmaps_coembedding.runner import MuseCoEmbeddingGenerator
-from cellmaps_coembedding.runner import CellmapsCoEmbedder
+
+import mlflow
+
+from cellmaps_coembedding.runner import (CellmapsCoEmbedder,
+                                         EmbeddingGenerator,
+                                         MuseCoEmbeddingGenerator,
+                                         ProteinGPSCoEmbeddingGenerator)
+from fairops.mlops.autolog import LoggerFactory
 
 
 def get_run_uri(run_id):

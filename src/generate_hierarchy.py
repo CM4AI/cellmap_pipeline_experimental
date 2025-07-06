@@ -1,11 +1,13 @@
-from cellmaps_generate_hierarchy.ppi import CosineSimilarityPPIGenerator
+import os
+
+import mlflow
+
+from cellmaps_generate_hierarchy.hcx import HCXFromCDAPSCXHierarchy
 from cellmaps_generate_hierarchy.hierarchy import CDAPSHiDeFHierarchyGenerator
 from cellmaps_generate_hierarchy.maturehierarchy import HiDeFHierarchyRefiner
-from cellmaps_generate_hierarchy.hcx import HCXFromCDAPSCXHierarchy
+from cellmaps_generate_hierarchy.ppi import CosineSimilarityPPIGenerator
 from cellmaps_generate_hierarchy.runner import CellmapsGenerateHierarchy
-import mlflow
 from fairops.mlops.autolog import LoggerFactory
-import os
 
 
 def get_run_uri(run_id):

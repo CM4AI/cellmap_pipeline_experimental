@@ -1,8 +1,8 @@
 import json
 
+from cellmaps_ppidownloader.gene import (APMSGeneNodeAttributeGenerator,
+                                         CM4AIGeneNodeAttributeGenerator)
 from cellmaps_ppidownloader.runner import CellmapsPPIDownloader
-from cellmaps_ppidownloader.gene import APMSGeneNodeAttributeGenerator
-from cellmaps_ppidownloader.gene import CM4AIGeneNodeAttributeGenerator
 
 
 json_prov = None
