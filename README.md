@@ -19,8 +19,6 @@ git clone git@github.com:wadeschulz/cellmaps_ppi_embedding_experimental.git
 git clone git@github.com:wadeschulz/cellmaps_coembedding_experimental.git
 git clone git@github.com:idekerlab/cellmaps_generate_hierarchy.git
 git clone git@github.com:idekerlab/cellmaps_hierarchyeval.git
-git clone git@github.com:idekerlab/cellmaps_annotate_hierarchy.git
-git clone git@github.com:idekerlab/cellmaps_vnn.git
 git clone git@github.com:acomphealth/fairops.git
 ```
 4. Install libraries from cloned repos
