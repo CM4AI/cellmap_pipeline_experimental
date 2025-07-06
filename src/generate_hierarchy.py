@@ -1,7 +1,7 @@
 import os
 
 import mlflow
-from mlops_helper import get_run_uri
+from mlops_helper import get_run_uri, log_artifact_directory
 
 from cellmaps_generate_hierarchy.hcx import HCXFromCDAPSCXHierarchy
 from cellmaps_generate_hierarchy.hierarchy import CDAPSHiDeFHierarchyGenerator
