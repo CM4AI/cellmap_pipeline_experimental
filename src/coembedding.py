@@ -28,14 +28,11 @@ def log_artifact_directory(dir_path):
 mlflow.set_experiment("coembedding")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
-img_embed_id = "55a72e22d8094436bdb88ddf6cfef081"
-ppi_embed_id = "425a708b21984258961b4927a0d9d0ff"
-
 base_path = "data/embedding"
-img_emb_path = f"data/embedding/images/{img_embed_id}"
-ppi_emb_path = f"data/embedding/ppi/{ppi_embed_id}"
 
 muse_config = {
+    "img_embed_run_id": "55a72e22d8094436bdb88ddf6cfef081",
+    "ppi_embed_run_id": "425a708b21984258961b4927a0d9d0ff",
     "algorithm": "muse",
     "latent_dimensions": 128,
     "n_epochs": 100,
@@ -71,12 +68,14 @@ configs = [muse_config]
 with mlflow.start_run() as parent_run:
     for config in configs:
         with mlflow.start_run(nested=True) as child_run:
+            img_emb_path = f"data/embedding/images/{config['img_embed_run_id']}"
+            ppi_emb_path = f"data/embedding/ppi/{config['ppi_embed_run_id']}"
             coemb_outdir = f"data/embedding/coembed/{child_run.info.run_id}"
             mlflow.log_params({
-                "img_embed_run_id": img_embed_id,
-                "img_embed_run_uri": get_run_uri(img_embed_id),
-                "ppi_embed_run_id": ppi_embed_id,
-                "ppi_embed_run_uri": get_run_uri(ppi_embed_id)
+                "img_embed_run_id": config['img_embed_run_id'],
+                "img_embed_run_uri": get_run_uri(config['img_embed_run_id']),
+                "ppi_embed_run_id": config['ppi_embed_run_id'],
+                "ppi_embed_run_uri": get_run_uri(config['ppi_embed_run_id'])
             })
 
             gen = EmbeddingGenerator()

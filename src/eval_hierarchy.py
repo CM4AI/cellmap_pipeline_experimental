@@ -26,10 +26,8 @@ def log_artifact_directory(dir_path):
 mlflow.set_experiment("hierarchy-eval")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
-hierarchy_run_id = "5fdc8986c1794b079565368e7ee1feff"
-hiergen_dir = f"data/hierarchy/generator/{hierarchy_run_id}"
-
 configs = [{
+    "hierarchy_run_id": "3c1a27fd8bc24f7c9be6dcc845559bab",
     "max_fdr": 0.05,
     "min_jaccard_index": 0.1,
     "min_comp_size": 4,
@@ -41,10 +39,9 @@ configs = [{
 with mlflow.start_run() as parent_run:
     for config in configs:
         with mlflow.start_run(nested=True) as child_run:
-            mlflow.log_params({
-                "hierarchy_run_id": hierarchy_run_id,
-                "hierarchy_run_uri": get_run_uri(hierarchy_run_id)
-            })
+            hiergen_dir = f"data/hierarchy/generator/{config['hierarchy_run_id']}"
+            config["hierarchy_run_uri"] = get_run_uri(config['hierarchy_run_id'])
+
             mlflow.log_params(config)
 
             hiereval_dir = f"data/hierarchy/eval/{child_run.info.run_id}"

@@ -30,11 +30,8 @@ def log_artifact_directory(dir_path):
 mlflow.set_experiment("hierarchy")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
-
-coembed_run_id = "b0188b90ebd6450894f7d9c6fd130e96"
-coembed_dir = f"data/embedding/coembed/{coembed_run_id}"
-
 configs = [{
+    "coembed_run_id": "1a5835e81b8c4d72be2907e3e053a5d9",
     "algorithm": "leiden",
     "k": 10,
     "maxres": 80,
@@ -50,10 +47,9 @@ configs = [{
 with mlflow.start_run() as parent_run:
     for config in configs:
         with mlflow.start_run(nested=True) as child_run:
-            mlflow.log_params({
-                "coembed_run_id": coembed_run_id,
-                "coembed_run_uri": get_run_uri(coembed_run_id)
-            })
+            coembed_dir = f"data/embedding/coembed/{config['coembed_run_id']}"
+            config["coembed_run_uri"] = get_run_uri(config['coembed_run_id'])
+            
             mlflow.log_params(config)
 
             hiergen_dir = f"data/hierarchy/generator/{child_run.info.run_id}"
