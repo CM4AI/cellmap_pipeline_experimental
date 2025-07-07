@@ -7,11 +7,11 @@ from cellmaps_hierarchyeval.runner import CellmapshierarchyevalRunner
 from fairops.mlops.autolog import LoggerFactory
 
 
-mlflow.set_experiment("hierarchy-eval")
+mlflow.set_experiment("hierarchyeval")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
 configs = [{
-    "hierarchy_run_id": "3c1a27fd8bc24f7c9be6dcc845559bab",
+    "hierarchy_run_id": "af3b48f4b10d4b90a16202b439bf43f9",
     "max_fdr": 0.05,
     "min_jaccard_index": 0.1,
     "min_comp_size": 4,
@@ -21,11 +21,15 @@ configs = [{
 }]
 
 with mlflow.start_run() as parent_run:
+    mlflow.set_tag("pipeline_step", "cellmaps_hierarchyeval_parent")
+    mlflow.log_param("n_trials", len(configs))
+
     for config in configs:
         with mlflow.start_run(nested=True) as child_run:
             hiergen_dir = f"data/hierarchy/generator/{config['hierarchy_run_id']}"
             config["hierarchy_run_uri"] = get_run_uri(config['hierarchy_run_id'])
 
+            mlflow.set_tag("pipeline_step", "cellmaps_hierarchyeval")
             mlflow.log_params(config)
 
             hiereval_dir = f"data/hierarchy/eval/{child_run.info.run_id}"

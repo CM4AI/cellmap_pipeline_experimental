@@ -16,8 +16,8 @@ ml_logger = LoggerFactory.get_logger("mlflow")
 base_path = "data/embedding"
 
 muse_config = {
-    "img_embed_run_id": "55a72e22d8094436bdb88ddf6cfef081",
-    "ppi_embed_run_id": "425a708b21984258961b4927a0d9d0ff",
+    "img_embed_run_id": "c00f0311a7e0485da5546363adbb01ff",
+    "ppi_embed_run_id": "a609e2314be04c65afda64a36a50062d",
     "algorithm": "muse",
     "latent_dimensions": 128,
     "n_epochs": 100,
@@ -51,6 +51,9 @@ muse_config = {
 configs = [muse_config]
 
 with mlflow.start_run() as parent_run:
+    mlflow.set_tag("pipeline_step", "cellmaps_coembedding_parent")
+    mlflow.log_param("n_trials", len(configs))
+
     for config in configs:
         with mlflow.start_run(nested=True) as child_run:
             img_emb_path = f"data/embedding/images/{config['img_embed_run_id']}"
@@ -62,6 +65,7 @@ with mlflow.start_run() as parent_run:
                 "ppi_embed_run_id": config['ppi_embed_run_id'],
                 "ppi_embed_run_uri": get_run_uri(config['ppi_embed_run_id'])
             })
+            mlflow.set_tag("pipeline_step", "cellmaps_coembedding")
 
             gen = EmbeddingGenerator()
 

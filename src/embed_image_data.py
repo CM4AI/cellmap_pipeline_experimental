@@ -21,10 +21,14 @@ configs = [{
 }]
 
 with mlflow.start_run() as parent_run:
+    mlflow.set_tag("pipeline_step", "cellmaps_image_embedding_parent")
+    mlflow.log_param("n_trials", len(configs))
+    
     for config in configs:
         with mlflow.start_run(nested=True) as child_run:
             out_dir = f"data/embedding/images/{child_run.info.run_id}"
             mlflow.log_params(config)
+            mlflow.set_tag("pipeline_step", "cellmaps_image_embedding")
 
             gen = DensenetEmbeddingGenerator(
                 inputdir=input_dir,

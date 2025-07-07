@@ -15,7 +15,7 @@ mlflow.set_experiment("hierarchy")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
 configs = [{
-    "coembed_run_id": "1a5835e81b8c4d72be2907e3e053a5d9",
+    "coembed_run_id": "f9ee6de1ba3d494ea03e0f5ae4c5c089",
     "algorithm": "leiden",
     "k": 10,
     "maxres": 80,
@@ -29,11 +29,15 @@ configs = [{
 }]
 
 with mlflow.start_run() as parent_run:
+    mlflow.set_tag("pipeline_step", "cellmaps_generate_hierarchy_parent")
+    mlflow.log_param("n_trials", len(configs))
+
     for config in configs:
         with mlflow.start_run(nested=True) as child_run:
             coembed_dir = f"data/embedding/coembed/{config['coembed_run_id']}"
             config["coembed_run_uri"] = get_run_uri(config['coembed_run_id'])
             
+            mlflow.set_tag("pipeline_step", "cellmaps_generate_hierarchy")
             mlflow.log_params(config)
 
             hiergen_dir = f"data/hierarchy/generator/{child_run.info.run_id}"
