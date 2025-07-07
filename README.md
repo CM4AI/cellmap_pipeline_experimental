@@ -26,9 +26,9 @@ git clone git@github.com:acomphealth/fairops.git
 pip install -e cellmaps_utils
 pip install -e cellmaps_imagedownloader
 pip install -e cellmaps_ppidownloader
-pip install -e cellmaps_image_embedding
-pip install -e cellmaps_ppi_embedding
-pip install -e cellmaps_coembedding
+pip install -e cellmaps_image_embedding_experimental
+pip install -e cellmaps_ppi_embedding_experimental
+pip install -e cellmaps_coembedding_experimental
 pip install -e cellmaps_generate_hierarchy
 pip install -e cellmaps_hierarchyeval
 pip install -e fairops
