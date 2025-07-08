@@ -24,31 +24,32 @@ muse_config = {
     "jackknife_percent": 0.0,
     "dropout": 0.5,
     "triplet_margin": 0.1,
-    "n_epochs_init": 100, # Only for Muse
+    "n_epochs_init": 100,
     "k": 10
 }
 
-# ProteinGPS not working with installed version of tf
-# pgps_config = {
-#     "algorithm": "proteingps",
-#     "latent_dimensions": 128,
-#     "n_epochs": 100,
-#     "jackknife_percent": 0.0,
-#     "dropout": 0.5,
-#     "triplet_margin": 0.2,
-#     "l2_norm": False, # Only for ProteinGPS
-#     "lambda_triplet": 1.0,
-#     "mean_losses": False,
-#     "batch_size": 16,
-#     "lambda_reconstruction": 1.0,
-#     "lambda_l2": 0.001,
-#     "learn_rate": 1e-4,
-#     "hidden_size_1": 512,
-#     "hidden_size_2": 256,
-#     "negative_from_batch": False
-# }
+pgps_config = {
+    "img_embed_run_id": "c00f0311a7e0485da5546363adbb01ff",
+    "ppi_embed_run_id": "a609e2314be04c65afda64a36a50062d",
+    "algorithm": "proteingps",
+    "latent_dimensions": 128,
+    "n_epochs": 100,
+    "jackknife_percent": 0.0,
+    "dropout": 0.5,
+    "triplet_margin": 0.2,
+    "l2_norm": False,
+    "lambda_triplet": 1.0,
+    "mean_losses": False,
+    "batch_size": 16,
+    "lambda_reconstruction": 1.0,
+    "lambda_l2": 0.001,
+    "learn_rate": 1e-4,
+    "hidden_size_1": 512,
+    "hidden_size_2": 256,
+    "negative_from_batch": False
+}
 
-configs = [muse_config]
+configs = [muse_config, pgps_config]
 
 with mlflow.start_run() as parent_run:
     mlflow.set_tag("pipeline_step", "cellmaps_coembedding_parent")
@@ -86,21 +87,22 @@ with mlflow.start_run() as parent_run:
                                                      n_epochs=config["n_epochs"],
                                                      jackknife_percent=config["jackknife_percent"],
                                                      dropout=config["dropout"],
-                                                     l2_norm=["l2_norm"],
-                                                     mean_losses=["mean_losses"],
-                                                     lambda_reconstruction=["lambda_reconstruction"],
-                                                     lambda_l2=["lambda_l2"],
-                                                     lambda_triplet=["triplet_margin"],
-                                                     batch_size=["batch_size"],
-                                                     triplet_margin=["triplet_margin"],
-                                                     learn_rate=["learn_rate"],
-                                                     hidden_size_1=["hidden_size_1"],
-                                                     hidden_size_2=["hidden_size_2"],
+                                                     l2_norm=config["l2_norm"],
+                                                     mean_losses=config["mean_losses"],
+                                                     lambda_reconstruction=config["lambda_reconstruction"],
+                                                     lambda_l2=config["lambda_l2"],
+                                                     lambda_triplet=config["triplet_margin"],
+                                                     batch_size=config["batch_size"],
+                                                     triplet_margin=config["triplet_margin"],
+                                                     learn_rate=config["learn_rate"],
+                                                     hidden_size_1=config["hidden_size_1"],
+                                                     hidden_size_2=config["hidden_size_2"],
                                                      save_update_epochs=True,
-                                                     negative_from_batch=["negative_from_batch"],
+                                                     negative_from_batch=config["negative_from_batch"],
                                                      outdir=coemb_outdir,
                                                      embeddings=[ppi_emb_path, img_emb_path],
-                                                     embedding_names=["ppi", "img"])
+                                                     embedding_names=["ppi", "img"],
+                                                     log_fairops=True)
                 
             inputdirs = gen.get_embedding_inputdirs()
             coembedder = CellmapsCoEmbedder(
