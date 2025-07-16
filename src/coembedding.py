@@ -16,8 +16,8 @@ ml_logger = LoggerFactory.get_logger("mlflow")
 base_path = "data/embedding"
 
 muse_config = {
-    "img_embed_run_id": "1346b1dbf28f4f29b3b2d1a38536633b",
-    "ppi_embed_run_id": "51c9d79fe3484889b4dd78a0d2f379f9",
+    "img_embed_run_id": "7111872ca5bb449fbdf8eecf0e382e01",
+    "ppi_embed_run_id": "545e7d4d88d748c8804fc6d1d5159740",
     "algorithm": "muse",
     "latent_dimensions": 128,
     "n_epochs": 100,

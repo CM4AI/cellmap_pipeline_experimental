@@ -11,7 +11,7 @@ mlflow.set_experiment("hierarchy-eval")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
 configs = [{
-    "hierarchy_run_id": "74161bf54d894578843c36f6806bf964",
+    "hierarchy_run_id": "f84b2fa79eb941ffac97884f0d74bbe7",
     "max_fdr": 0.05,
     "min_jaccard_index": 0.1,
     "min_comp_size": 4,

@@ -15,7 +15,7 @@ mlflow.set_experiment("hierarchy")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
 configs = [{
-    "coembed_run_id": "c947489add944b1194abe21c7f03cee7",
+    "coembed_run_id": "19b162bfb73646cdb96e26f83d32cf5b",
     "algorithm": "leiden",
     "k": 10,
     "maxres": 80,
