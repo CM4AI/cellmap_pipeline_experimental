@@ -8,7 +8,7 @@ from cellmaps_image_embedding.runner import (CellmapsImageEmbedder,
                                              EmbeddingGenerator)
 from fairops.mlops.autolog import LoggerFactory
 
-
+mlflow.set_tracking_uri("http://127.0.0.1:5005")
 mlflow.set_experiment("image_embedding")
 ml_logger = LoggerFactory.get_logger("mlflow")
 

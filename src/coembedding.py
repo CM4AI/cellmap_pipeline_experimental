@@ -9,15 +9,15 @@ from cellmaps_coembedding.runner import (CellmapsCoEmbedder,
                                          ProteinGPSCoEmbeddingGenerator)
 from fairops.mlops.autolog import LoggerFactory
 
-
+mlflow.set_tracking_uri("http://127.0.0.1:5005")
 mlflow.set_experiment("coembedding")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
 base_path = "data/embedding"
 
 muse_config = {
-    "img_embed_run_id": "55a72e22d8094436bdb88ddf6cfef081",
-    "ppi_embed_run_id": "425a708b21984258961b4927a0d9d0ff",
+    "img_embed_run_id": "1346b1dbf28f4f29b3b2d1a38536633b",
+    "ppi_embed_run_id": "51c9d79fe3484889b4dd78a0d2f379f9",
     "algorithm": "muse",
     "latent_dimensions": 128,
     "n_epochs": 100,

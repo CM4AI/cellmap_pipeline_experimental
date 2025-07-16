@@ -9,7 +9,7 @@ from cellmaps_ppi_embedding.runner import (CellMapsPPIEmbedder,
                                            Node2VecEmbeddingGenerator)
 from fairops.mlops.autolog import LoggerFactory
 
-
+mlflow.set_tracking_uri("http://127.0.0.1:5005")
 mlflow.set_experiment("ppi_embedding")
 ml_logger = LoggerFactory.get_logger("mlflow")
 

@@ -6,12 +6,12 @@ from mlops_helper import get_run_uri, log_artifact_directory
 from cellmaps_hierarchyeval.runner import CellmapshierarchyevalRunner
 from fairops.mlops.autolog import LoggerFactory
 
-
+mlflow.set_tracking_uri("http://127.0.0.1:5005")
 mlflow.set_experiment("hierarchy-eval")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
 configs = [{
-    "hierarchy_run_id": "3c1a27fd8bc24f7c9be6dcc845559bab",
+    "hierarchy_run_id": "74161bf54d894578843c36f6806bf964",
     "max_fdr": 0.05,
     "min_jaccard_index": 0.1,
     "min_comp_size": 4,

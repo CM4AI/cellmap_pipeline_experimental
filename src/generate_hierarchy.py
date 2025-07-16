@@ -10,12 +10,12 @@ from cellmaps_generate_hierarchy.ppi import CosineSimilarityPPIGenerator
 from cellmaps_generate_hierarchy.runner import CellmapsGenerateHierarchy
 from fairops.mlops.autolog import LoggerFactory
 
-
+mlflow.set_tracking_uri("http://127.0.0.1:5005")
 mlflow.set_experiment("hierarchy")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
 configs = [{
-    "coembed_run_id": "1a5835e81b8c4d72be2907e3e053a5d9",
+    "coembed_run_id": "c947489add944b1194abe21c7f03cee7",
     "algorithm": "leiden",
     "k": 10,
     "maxres": 80,
