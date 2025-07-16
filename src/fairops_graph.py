@@ -1,9 +1,7 @@
-# Import and setup 
 import mlflow
 from mlflow.tracking import MlflowClient
 from neo4j import GraphDatabase
 
-# Connect to Neo4J and Mlflow
 NEO4J_URI = "neo4j+s://f2de980c.databases.neo4j.io"
 USERNAME = "neo4j"
 PASSWORD = "kWsYUax7JsaNQXOVpm-kzwMfjZZilQ5aLWxSmGBe32g"
@@ -12,7 +10,6 @@ mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
 
 client = MlflowClient()
 
-# Parameter sanitization to preserve original data types
 def sanitize_params(params):
     safe_params = {}
     for k, v in params.items():
@@ -30,8 +27,6 @@ def sanitize_params(params):
             safe_params[k] = str(v)
     return safe_params
 
-
-# Fetch experiments and runs from Mlflow server
 def fetch_all_experiments():
     experiments = client.search_experiments(filter_string="")
     print(f"Fetched {len(experiments)} experiments.")
@@ -70,7 +65,6 @@ def fetch_child_runs(parent_run_id):
     print(f"Parent run {parent_run_id}: fetched {len(child_runs)} child runs.")
     return child_runs
 
-# Create Neo4j nodes and edges
 def create_nodes_and_relationships(driver, experiments, parent_runs_map, child_runs_map):
     with driver.session() as session:
 
