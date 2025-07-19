@@ -11,7 +11,7 @@ mlflow.set_experiment("hierarchyeval")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
 configs = [{
-    "hierarchy_run_id": "af3b48f4b10d4b90a16202b439bf43f9",
+    "hierarchy_run_id": "3ded3377cc1841008ce1aa01351ae9ed",
     "max_fdr": 0.05,
     "min_jaccard_index": 0.1,
     "min_comp_size": 4,
@@ -30,7 +30,8 @@ with mlflow.start_run() as parent_run:
             config["hierarchy_run_uri"] = get_run_uri(config['hierarchy_run_id'])
 
             mlflow.set_tag("pipeline_step", "cellmaps_hierarchyeval")
-            mlflow.log_params(config)
+            mlflow.log_param("hierarchy_run_id", config["hierarchy_run_id"])
+            mlflow.log_param("hierarchy_run_uri", config["hierarchy_run_uri"])
 
             hiereval_dir = f"data/hierarchy/eval/{child_run.info.run_id}"
             
@@ -43,6 +44,7 @@ with mlflow.start_run() as parent_run:
                 corum=config["corum"],
                 go_cc=config["go_cc"],
                 hpa=config["hpa"],
+                log_fairops=True
             )
 
             eval_hierarchy.run()
