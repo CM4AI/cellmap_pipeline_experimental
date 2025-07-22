@@ -22,16 +22,14 @@ with open("examples/provenance.json", 'r') as f:
 
 UUID = "95bc75d5-d1d1-11ee-8a40-005056ae23aa"
 
-ndexgen = NdexGeneNodeAttributeGenerator(uuid=UUID)
-
-apmsgen = APMSGeneNodeAttributeGenerator(
-    apms_edgelist=ndexgen.get_apms_edgelist(ndexgen.nice_cx, ndexgen.node_attrs_list),
-    apms_baitlist=ndexgen.get_apms_baitlist_from_ndex(ndexgen.nice_cx)
+ndexgen = NdexGeneNodeAttributeGenerator(uuid=UUID,
+                                         apms_edgelist=NdexGeneNodeAttributeGenerator.get_apms_edgelist(uuid=UUID),
+                                         apms_baitlist=NdexGeneNodeAttributeGenerator.get_apms_baitlist_from_ndex(uuid=UUID)
 )
 
 ppi_downloader = CellmapsPPIDownloader(
     outdir="data/ppi",
-    apmsgen=apmsgen,
+    apmsgen=ndexgen,
     skip_logging=True,
     provenance=json_prov)
 
