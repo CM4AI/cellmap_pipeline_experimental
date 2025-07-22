@@ -23,7 +23,7 @@ with open("examples/provenance.json", 'r') as f:
 UUID = "95bc75d5-d1d1-11ee-8a40-005056ae23aa"
 
 ndexgen = NdexGeneNodeAttributeGenerator(uuid=UUID,
-                                         apms_edgelist=NdexGeneNodeAttributeGenerator.get_apms_edgelist(uuid=UUID),
+                                         apms_edgelist=NdexGeneNodeAttributeGenerator.get_apms_edgelist_from_ndex(uuid=UUID),
                                          apms_baitlist=NdexGeneNodeAttributeGenerator.get_apms_baitlist_from_ndex(uuid=UUID)
 )
 
