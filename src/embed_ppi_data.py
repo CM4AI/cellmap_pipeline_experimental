@@ -13,9 +13,8 @@ from fairops.mlops.autolog import LoggerFactory
 mlflow.set_experiment("ppi_embedding")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
-input_dir = "data/ppi"
-
 configs = [{
+    "ppi_downloader_run_id": "f85b4112d75b41589cbc0bcc3b8748c2",
     "dimensions": 1024,
     "walk_length": 80,
     "num_walks": 10,
@@ -36,6 +35,9 @@ with mlflow.start_run() as parent_run:
     for config in configs:
         with mlflow.start_run(nested=True) as child_run:
             mlflow.set_tag("pipeline_step", "cellmaps_ppi_embedding")
+            mlflow.log_param("ppi_downloader_run_id", config['ppi_downloader_run_id'])
+
+            input_dir = f"data/ppi/{config['ppi_downloader_run_id']}"
             out_dir = f"data/embedding/ppi/{child_run.info.run_id}"
             
             gen = Node2VecEmbeddingGenerator(

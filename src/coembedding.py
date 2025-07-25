@@ -16,8 +16,8 @@ ml_logger = LoggerFactory.get_logger("mlflow")
 base_path = "data/embedding"
 
 muse_config = {
-    "img_embed_run_id": "c00f0311a7e0485da5546363adbb01ff",
-    "ppi_embed_run_id": "a609e2314be04c65afda64a36a50062d",
+    "img_embed_run_id": "3aacc6d85ff44e26b556b4ac2ea4e3cd",
+    "ppi_embed_run_id": "a55a44ba6f324866b64f1af70608b272",
     "algorithm": "muse",
     "latent_dimensions": 128,
     "n_epochs": 100,
@@ -29,8 +29,8 @@ muse_config = {
 }
 
 pgps_config = {
-    "img_embed_run_id": "c00f0311a7e0485da5546363adbb01ff",
-    "ppi_embed_run_id": "a609e2314be04c65afda64a36a50062d",
+    "img_embed_run_id": "3aacc6d85ff44e26b556b4ac2ea4e3cd",
+    "ppi_embed_run_id": "a55a44ba6f324866b64f1af70608b272",
     "algorithm": "proteingps",
     "latent_dimensions": 128,
     "n_epochs": 100,

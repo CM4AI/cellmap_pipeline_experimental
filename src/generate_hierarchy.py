@@ -14,19 +14,34 @@ from fairops.mlops.autolog import LoggerFactory
 mlflow.set_experiment("hierarchy")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
-configs = [{
-    "coembed_run_id": "f9ee6de1ba3d494ea03e0f5ae4c5c089",
-    "algorithm": "leiden",
-    "k": 10,
-    "maxres": 80,
-    "containment_threshold": 0.75,
-    "jaccard_threshold": 0.9,
-    "min_diff": 1,
-    "min_system_size": 4,
-    "ppi_cutoffs": [0.001, 0.002, 0.003],
-    "parent_ppi_cutoff": 0.1,
-    "bootstrap_edges": 0
-}]
+configs = [
+    {
+        "coembed_run_id": "ff4852eecf81492b8ee7c4a93dd80a14",
+        "algorithm": "leiden",
+        "k": 10,
+        "maxres": 80,
+        "containment_threshold": 0.75,
+        "jaccard_threshold": 0.9,
+        "min_diff": 1,
+        "min_system_size": 4,
+        "ppi_cutoffs": [0.001, 0.002, 0.003],
+        "parent_ppi_cutoff": 0.1,
+        "bootstrap_edges": 0
+    },
+    {
+        "coembed_run_id": "ab7faabe5b23487a82e02e7c4a6cef96",
+        "algorithm": "leiden",
+        "k": 10,
+        "maxres": 80,
+        "containment_threshold": 0.75,
+        "jaccard_threshold": 0.9,
+        "min_diff": 1,
+        "min_system_size": 4,
+        "ppi_cutoffs": [0.001, 0.002, 0.003],
+        "parent_ppi_cutoff": 0.1,
+        "bootstrap_edges": 0
+    }
+]
 
 with mlflow.start_run() as parent_run:
     mlflow.set_tag("pipeline_step", "cellmaps_generate_hierarchy_parent")

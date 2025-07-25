@@ -10,26 +10,25 @@ conda activate cellmaps_dev
 3. Clone repositories
 ```
 git clone git@github.com:CM4AI/cellmap_pipeline_experimental.git
-git clone git@github.com:idekerlab/cellmaps_pipeline.git
-git clone git@github.com:idekerlab/cellmaps_utils.git
-git clone git@github.com:idekerlab/cellmaps_imagedownloader.git
-git clone git@github.com:idekerlab/cellmaps_ppidownloader.git
+git clone git@github.com:wadeschulz/cellmaps_utils_experimental.git
+git clone git@github.com:wadeschulz/cellmaps_imagedownloader_experimental.git
+git clone git@github.com:wadeschulz/cellmaps_ppidownloader_experimental.git
 git clone git@github.com:wadeschulz/cellmaps_image_embedding_experimental.git
 git clone git@github.com:wadeschulz/cellmaps_ppi_embedding_experimental.git
 git clone git@github.com:wadeschulz/cellmaps_coembedding_experimental.git
-git clone git@github.com:idekerlab/cellmaps_generate_hierarchy.git
+git clone git@github.com:wadeschulz/cellmaps_generate_hierarchy_experimental.git
 git clone git@github.com:wadeschulz/cellmaps_hierarchyeval_experimental.git
 git clone git@github.com:acomphealth/fairops.git
 ```
 4. Install libraries from cloned repos
 ```
-pip install -e cellmaps_utils
-pip install -e cellmaps_imagedownloader
-pip install -e cellmaps_ppidownloader
+pip install -e cellmaps_utils_experimental
+pip install -e cellmaps_imagedownloader_experimental
+pip install -e cellmaps_ppidownloader_experimental
 pip install -e cellmaps_image_embedding_experimental
 pip install -e cellmaps_ppi_embedding_experimental
 pip install -e cellmaps_coembedding_experimental
-pip install -e cellmaps_generate_hierarchy
+pip install -e cellmaps_generate_hierarchy_experimental
 pip install -e cellmaps_hierarchyeval_experimental
 pip install -e fairops
 pip install mlflow

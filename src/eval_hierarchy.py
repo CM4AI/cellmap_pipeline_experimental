@@ -10,15 +10,26 @@ from fairops.mlops.autolog import LoggerFactory
 mlflow.set_experiment("hierarchyeval")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
-configs = [{
-    "hierarchy_run_id": "3ded3377cc1841008ce1aa01351ae9ed",
-    "max_fdr": 0.05,
-    "min_jaccard_index": 0.1,
-    "min_comp_size": 4,
-    "corum": '633291aa-6e1d-11ef-a7fd-005056ae23aa',
-    "go_cc": '6722d74d-6e20-11ef-a7fd-005056ae23aa',
-    "hpa": '68c2f2c0-6e20-11ef-a7fd-005056ae23aa'
-}]
+configs = [
+    {
+        "hierarchy_run_id": "33011daf1dd448779ff544c87396d972",
+        "max_fdr": 0.05,
+        "min_jaccard_index": 0.1,
+        "min_comp_size": 4,
+        "corum": '633291aa-6e1d-11ef-a7fd-005056ae23aa',
+        "go_cc": '6722d74d-6e20-11ef-a7fd-005056ae23aa',
+        "hpa": '68c2f2c0-6e20-11ef-a7fd-005056ae23aa'
+    },
+    {
+        "hierarchy_run_id": "2c3bd1a08fce4297935339d4f9b575c6",
+        "max_fdr": 0.05,
+        "min_jaccard_index": 0.1,
+        "min_comp_size": 4,
+        "corum": '633291aa-6e1d-11ef-a7fd-005056ae23aa',
+        "go_cc": '6722d74d-6e20-11ef-a7fd-005056ae23aa',
+        "hpa": '68c2f2c0-6e20-11ef-a7fd-005056ae23aa'
+    }
+]
 
 with mlflow.start_run() as parent_run:
     mlflow.set_tag("pipeline_step", "cellmaps_hierarchyeval_parent")
