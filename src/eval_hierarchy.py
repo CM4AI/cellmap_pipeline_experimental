@@ -12,7 +12,7 @@ ml_logger = LoggerFactory.get_logger("mlflow")
 
 configs = [
     {
-        "hierarchy_run_id": "33011daf1dd448779ff544c87396d972",
+        "hierarchy_run_id": "30271acce96a42adae3c41c9c4f6a5b1",
         "max_fdr": 0.05,
         "min_jaccard_index": 0.1,
         "min_comp_size": 4,
@@ -21,7 +21,7 @@ configs = [
         "hpa": '68c2f2c0-6e20-11ef-a7fd-005056ae23aa'
     },
     {
-        "hierarchy_run_id": "2c3bd1a08fce4297935339d4f9b575c6",
+        "hierarchy_run_id": "fc69f8fb0697459284b23aa931501c91",
         "max_fdr": 0.05,
         "min_jaccard_index": 0.1,
         "min_comp_size": 4,

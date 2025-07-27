@@ -25,7 +25,7 @@ with mlflow.start_run() as parent_run:
     
     for config in configs:
         with mlflow.start_run(nested=True) as child_run:
-            out_dir = f"data/embedding/images/{child_run.info.run_id}"
+            out_dir = f"data/embedding/{child_run.info.run_id}"
             mlflow.log_params(config)
             mlflow.set_tag("pipeline_step", "cellmaps_image_embedding")
 

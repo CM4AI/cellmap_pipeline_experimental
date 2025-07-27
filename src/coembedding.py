@@ -16,8 +16,8 @@ ml_logger = LoggerFactory.get_logger("mlflow")
 base_path = "data/embedding"
 
 muse_config = {
-    "img_embed_run_id": "3aacc6d85ff44e26b556b4ac2ea4e3cd",
-    "ppi_embed_run_id": "a55a44ba6f324866b64f1af70608b272",
+    "img_embed_run_id": "e49c82a296e64bb4a86512d2ec90c728",
+    "ppi_embed_run_id": "2b99dbc7f29a4ad8a489711c60179416",
     "algorithm": "muse",
     "latent_dimensions": 128,
     "n_epochs": 100,
@@ -29,8 +29,8 @@ muse_config = {
 }
 
 pgps_config = {
-    "img_embed_run_id": "3aacc6d85ff44e26b556b4ac2ea4e3cd",
-    "ppi_embed_run_id": "a55a44ba6f324866b64f1af70608b272",
+    "img_embed_run_id": "e49c82a296e64bb4a86512d2ec90c728",
+    "ppi_embed_run_id": "2b99dbc7f29a4ad8a489711c60179416",
     "algorithm": "proteingps",
     "latent_dimensions": 128,
     "n_epochs": 100,
@@ -57,8 +57,14 @@ with mlflow.start_run() as parent_run:
 
     for config in configs:
         with mlflow.start_run(nested=True) as child_run:
-            img_emb_path = f"data/embedding/images/{config['img_embed_run_id']}"
-            ppi_emb_path = f"data/embedding/ppi/{config['ppi_embed_run_id']}"
+            embedding_paths = []
+            embedding_names = []
+
+            for k,v in config.items():
+                if k.endswith("_embed_run_id"):
+                    embedding_names.append(k.split("_")[0])
+                    embedding_paths.append(f"data/embedding/{config[k]}")
+        
             coemb_outdir = f"data/embedding/coembed/{child_run.info.run_id}"
             mlflow.log_params({
                 "img_embed_run_id": config['img_embed_run_id'],
@@ -79,8 +85,8 @@ with mlflow.start_run() as parent_run:
                                                triplet_margin=config["triplet_margin"],
                                                k=config["k"],
                                                outdir=coemb_outdir,
-                                               embeddings=[ppi_emb_path, img_emb_path],
-                                               embedding_names=["ppi", "img"],
+                                               embeddings=embedding_paths,
+                                               embedding_names=embedding_names,
                                                log_fairops=True)
             elif config["algorithm"] == 'proteingps':
                 gen = ProteinGPSCoEmbeddingGenerator(dimensions=config["latent_dimensions"],
@@ -100,8 +106,8 @@ with mlflow.start_run() as parent_run:
                                                      save_update_epochs=True,
                                                      negative_from_batch=config["negative_from_batch"],
                                                      outdir=coemb_outdir,
-                                                     embeddings=[ppi_emb_path, img_emb_path],
-                                                     embedding_names=["ppi", "img"],
+                                                     embeddings=embedding_paths,
+                                                     embedding_names=embedding_names,
                                                      log_fairops=True)
                 
             inputdirs = gen.get_embedding_inputdirs()

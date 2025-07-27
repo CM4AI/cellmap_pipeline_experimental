@@ -16,7 +16,7 @@ ml_logger = LoggerFactory.get_logger("mlflow")
 
 configs = [
     {
-        "coembed_run_id": "ff4852eecf81492b8ee7c4a93dd80a14",
+        "coembed_run_id": "9ddae4cca39c4a08a9ba8f2d656f3ad8",
         "algorithm": "leiden",
         "k": 10,
         "maxres": 80,
@@ -29,7 +29,7 @@ configs = [
         "bootstrap_edges": 0
     },
     {
-        "coembed_run_id": "ab7faabe5b23487a82e02e7c4a6cef96",
+        "coembed_run_id": "f7c8af16269b4404905a58bf2be7ceb4",
         "algorithm": "leiden",
         "k": 10,
         "maxres": 80,

@@ -38,7 +38,7 @@ with mlflow.start_run() as parent_run:
             mlflow.log_param("ppi_downloader_run_id", config['ppi_downloader_run_id'])
 
             input_dir = f"data/ppi/{config['ppi_downloader_run_id']}"
-            out_dir = f"data/embedding/ppi/{child_run.info.run_id}"
+            out_dir = f"data/embedding/{child_run.info.run_id}"
             
             gen = Node2VecEmbeddingGenerator(
                 nx_network=nx.read_edgelist(
