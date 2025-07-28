@@ -24,6 +24,18 @@ with mlflow.start_run() as run:
     with open("examples/provenance.json", 'r') as f:
         json_prov = json.load(f)
 
+    ## Tutorial note:
+    ## Download by sample list code will use a small dataset for rapid testing of the code
+    ## Download by cell line will use the larger U2OS data set which is more computationally
+    ## intensive but produces a cell map from an entire data set.
+    ## The relevant code can be commented/uncommented based on use case and compute capacity.
+
+    ## Download by sample list
+    # created_outdir = False
+    # mlflow.log_param("image_source", "cellmaps_pipeline_example")
+    # samples_list = ImageGeneNodeAttributeGenerator.get_samples_from_csvfile("examples/samples.csv")
+    # unique_list = ImageGeneNodeAttributeGenerator.get_unique_list_from_csvfile("examples/unique.csv")
+
     ## Download by cell line
     cell_line = "U2OS"
     mlflow.log_param("image_source", "hpa")
@@ -39,12 +51,6 @@ with mlflow.start_run() as run:
     samples, proteinatlasxml = hpa_processor.get_sample_list_from_hpa()
     samples_list = ImageGeneNodeAttributeGenerator.get_samples_from_csvfile(samples)
     unique_list = None
-
-    ## Download by sample list
-    # created_outdir = False
-    # mlflow.log_param("image_source", "cellmaps_pipeline_example")
-    # samples_list = ImageGeneNodeAttributeGenerator.get_samples_from_csvfile("examples/samples.csv")
-    # unique_list = ImageGeneNodeAttributeGenerator.get_unique_list_from_csvfile("examples/unique.csv")
 
     ## Download images
     dloader = MultiProcessImageDownloader(
