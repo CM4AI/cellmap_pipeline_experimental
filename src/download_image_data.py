@@ -31,26 +31,26 @@ with mlflow.start_run() as run:
     ## The relevant code can be commented/uncommented based on use case and compute capacity.
 
     ## Download by sample list
-    # created_outdir = False
-    # mlflow.log_param("image_source", "cellmaps_pipeline_example")
-    # samples_list = ImageGeneNodeAttributeGenerator.get_samples_from_csvfile("examples/samples.csv")
-    # unique_list = ImageGeneNodeAttributeGenerator.get_unique_list_from_csvfile("examples/unique.csv")
+    created_outdir = False
+    mlflow.log_param("image_source", "cellmaps_pipeline_example")
+    samples_list = ImageGeneNodeAttributeGenerator.get_samples_from_csvfile("examples/samples.csv")
+    unique_list = ImageGeneNodeAttributeGenerator.get_unique_list_from_csvfile("examples/unique.csv")
 
     ## Download by cell line
-    cell_line = "U2OS"
-    mlflow.log_param("image_source", "hpa")
-    mlflow.log_param("cell_line", cell_line)
+    # cell_line = "U2OS"
+    # mlflow.log_param("image_source", "hpa")
+    # mlflow.log_param("cell_line", cell_line)
     
-    created_outdir = True
-    hpa_processor = ProteinAtlasProcessor(
-        outdir,
-        ProteinAtlasReader.DEFAULT_PROTEINATLAS_URL,
-        None,
-        cell_line
-    )
-    samples, proteinatlasxml = hpa_processor.get_sample_list_from_hpa()
-    samples_list = ImageGeneNodeAttributeGenerator.get_samples_from_csvfile(samples)
-    unique_list = None
+    # created_outdir = True
+    # hpa_processor = ProteinAtlasProcessor(
+    #     outdir,
+    #     ProteinAtlasReader.DEFAULT_PROTEINATLAS_URL,
+    #     None,
+    #     cell_line
+    # )
+    # samples, proteinatlasxml = hpa_processor.get_sample_list_from_hpa()
+    # samples_list = ImageGeneNodeAttributeGenerator.get_samples_from_csvfile(samples)
+    # unique_list = None
 
     ## Download images
     dloader = MultiProcessImageDownloader(

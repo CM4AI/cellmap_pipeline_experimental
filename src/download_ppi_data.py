@@ -25,26 +25,27 @@ with mlflow.start_run() as run:
     ## The relevant code can be commented/uncommented based on use case and compute capacity.
 
     ## Process example data
-    # attr_generator = APMSGeneNodeAttributeGenerator(
-    #     apms_edgelist=APMSGeneNodeAttributeGenerator.get_apms_edgelist_from_tsvfile("examples/edgelist.tsv",
-    #                                                                                 geneid_one_col=APMSGeneNodeAttributeGenerator.GENEID_COL1,
-    #                                                                                 symbol_one_col=APMSGeneNodeAttributeGenerator.SYMBOL_COL1,
-    #                                                                                 geneid_two_col=APMSGeneNodeAttributeGenerator.GENEID_COL2,
-    #                                                                                 symbol_two_col=APMSGeneNodeAttributeGenerator.SYMBOL_COL2),
-    #     apms_baitlist=APMSGeneNodeAttributeGenerator.get_apms_baitlist_from_tsvfile("examples/baitlist.tsv",
-    #                                                                                 symbol_col=APMSGeneNodeAttributeGenerator.BAITLIST_GENE_SYMBOL,
-    #                                                                                 geneid_col=APMSGeneNodeAttributeGenerator.BAITLIST_GENE_ID,
-    #                                                                                 numinteractors_col=APMSGeneNodeAttributeGenerator.BAITLIST_NUM_INTERACTORS))
+    mlflow.log_param("ppi_source", "cellmaps_pipeline_example")
+    attr_generator = APMSGeneNodeAttributeGenerator(
+        apms_edgelist=APMSGeneNodeAttributeGenerator.get_apms_edgelist_from_tsvfile("examples/edgelist.tsv",
+                                                                                    geneid_one_col=APMSGeneNodeAttributeGenerator.GENEID_COL1,
+                                                                                    symbol_one_col=APMSGeneNodeAttributeGenerator.SYMBOL_COL1,
+                                                                                    geneid_two_col=APMSGeneNodeAttributeGenerator.GENEID_COL2,
+                                                                                    symbol_two_col=APMSGeneNodeAttributeGenerator.SYMBOL_COL2),
+        apms_baitlist=APMSGeneNodeAttributeGenerator.get_apms_baitlist_from_tsvfile("examples/baitlist.tsv",
+                                                                                    symbol_col=APMSGeneNodeAttributeGenerator.BAITLIST_GENE_SYMBOL,
+                                                                                    geneid_col=APMSGeneNodeAttributeGenerator.BAITLIST_GENE_ID,
+                                                                                    numinteractors_col=APMSGeneNodeAttributeGenerator.BAITLIST_NUM_INTERACTORS))
 
     ## Download PPI network from NDEX
-    UUID = "95bc75d5-d1d1-11ee-8a40-005056ae23aa" # U2OS Network
-    mlflow.log_param("ppi_source", "ndex")
-    mlflow.log_param("ndex_uuid", UUID)
+    # UUID = "95bc75d5-d1d1-11ee-8a40-005056ae23aa" # U2OS Network
+    # mlflow.log_param("ppi_source", "ndex")
+    # mlflow.log_param("ndex_uuid", UUID)
 
-    attr_generator = NdexGeneNodeAttributeGenerator(uuid=UUID,
-                                            apms_edgelist=NdexGeneNodeAttributeGenerator.get_apms_edgelist_from_ndex(uuid=UUID),
-                                            apms_baitlist=NdexGeneNodeAttributeGenerator.get_apms_baitlist_from_ndex(uuid=UUID)
-    )
+    # attr_generator = NdexGeneNodeAttributeGenerator(uuid=UUID,
+    #                                         apms_edgelist=NdexGeneNodeAttributeGenerator.get_apms_edgelist_from_ndex(uuid=UUID),
+    #                                         apms_baitlist=NdexGeneNodeAttributeGenerator.get_apms_baitlist_from_ndex(uuid=UUID)
+    # )
 
     ## Download PPI data
     ppi_downloader = CellmapsPPIDownloader(
