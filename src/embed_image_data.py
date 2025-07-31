@@ -1,5 +1,6 @@
 import os
 
+import json
 import mlflow
 from mlops_helper import log_artifact_directory
 
@@ -12,12 +13,29 @@ from fairops.mlops.autolog import LoggerFactory
 mlflow.set_experiment("image_embedding")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
-configs = [{
-    "image_downloader_run_id": "7c7a02c77dca43d4b411ecb4415730b1",
-    "dimensions": EmbeddingGenerator.DIMENSIONS,
-    "fold": EmbeddingGenerator.DEFAULT_FOLD,
-    "embedding_model": "https://github.com/CellProfiling/densenet/releases/download/v0.1.0/external_crop512_focal_slov_hardlog_class_densenet121_dropout_i768_aug2_5folds_fold0_final.pth"
-}]
+configs_file_path = './configs/embed_image_configs.json'
+
+configs = []
+with open (configs_file_path, 'r') as f:
+    configs.append(json.load(f))
+
+for config in configs:
+    if config.get("dimensions") == "USE_DEFAULT_DIMENSIONS":
+        config["dimensions"] = EmbeddingGenerator.DIMENSIONS
+
+    if config.get("fold") == "USE_DEFAULT_FOLD":
+        config["fold"] = EmbeddingGenerator.DEFAULT_FOLD
+
+    for k, v in config.items():
+        if k.endswith("_run_id") and (not v or len(v.strip()) < 1):
+            raise Exception (f"'{k}' needs to be provided")
+
+#configs = [{
+#    "image_downloader_run_id": "7c7a02c77dca43d4b411ecb4415730b1",
+#    "dimensions": EmbeddingGenerator.DIMENSIONS,
+#    "fold": EmbeddingGenerator.DEFAULT_FOLD,
+#    "embedding_model": "https://github.com/CellProfiling/densenet/releases/download/v0.1.0/external_crop512_focal_slov_hardlog_class_densenet121_dropout_i768_aug2_5folds_fold0_final.pth"
+#}]
 
 with mlflow.start_run() as parent_run:
     mlflow.set_tag("pipeline_step", "cellmaps_image_embedding_parent")

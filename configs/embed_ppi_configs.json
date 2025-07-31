@@ -1,0 +1,14 @@
+{
+    "ppi_downloader_run_id": null,
+    "dimensions": 1024,
+    "walk_length": 80,
+    "num_walks": 10,
+    "workers": 8,
+    "p": 2,
+    "q": 1,
+    "seed": null,
+    "window": 10,
+    "min_count": 0,
+    "sg": 1,
+    "epochs": 1
+}

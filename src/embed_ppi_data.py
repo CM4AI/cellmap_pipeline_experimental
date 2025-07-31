@@ -1,4 +1,5 @@
 import os
+import json
 
 import mlflow
 import networkx as nx
@@ -13,20 +14,34 @@ from fairops.mlops.autolog import LoggerFactory
 mlflow.set_experiment("ppi_embedding")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
-configs = [{
-    "ppi_downloader_run_id": "f85b4112d75b41589cbc0bcc3b8748c2",
-    "dimensions": 1024,
-    "walk_length": 80,
-    "num_walks": 10,
-    "workers": 8,
-    "p": 2,
-    "q": 1,
-    "seed": None,
-    "window": 10,
-    "min_count": 0,
-    "sg": 1,
-    "epochs": 1
-}]
+configs_file_path = "./configs/embed_ppi_configs.json"
+
+configs = []
+with open (configs_file_path, 'r') as f:
+    configs.append(json.load(f))
+
+for config in configs:
+    for k, v in config.items():
+        if k.endswith("_run_id") and (not v or len(v.strip()) < 1):
+            raise Exception(f"'{k}' needs to be provided")
+
+
+
+
+#configs = [{
+#    "ppi_downloader_run_id": "f85b4112d75b41589cbc0bcc3b8748c2",
+#    "dimensions": 1024,
+#    "walk_length": 80,
+#    "num_walks": 10,
+#    "workers": 8,
+#    "p": 2,
+#    "q": 1,
+#    "seed": None,
+#    "window": 10,
+#    "min_count": 0,
+#    "sg": 1,
+#    "epochs": 1
+#}]
 
 with mlflow.start_run() as parent_run:
     mlflow.set_tag("pipeline_step", "cellmaps_ppi_embedding_parent")
