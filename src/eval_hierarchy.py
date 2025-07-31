@@ -1,4 +1,5 @@
 import os
+import json
 
 import mlflow
 from mlops_helper import get_run_uri, log_artifact_directory
@@ -10,26 +11,36 @@ from fairops.mlops.autolog import LoggerFactory
 mlflow.set_experiment("hierarchyeval")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
-configs = [
-    {
-        "hierarchy_run_id": "30271acce96a42adae3c41c9c4f6a5b1",
-        "max_fdr": 0.05,
-        "min_jaccard_index": 0.1,
-        "min_comp_size": 4,
-        "corum": '633291aa-6e1d-11ef-a7fd-005056ae23aa',
-        "go_cc": '6722d74d-6e20-11ef-a7fd-005056ae23aa',
-        "hpa": '68c2f2c0-6e20-11ef-a7fd-005056ae23aa'
-    },
-    {
-        "hierarchy_run_id": "fc69f8fb0697459284b23aa931501c91",
-        "max_fdr": 0.05,
-        "min_jaccard_index": 0.1,
-        "min_comp_size": 4,
-        "corum": '633291aa-6e1d-11ef-a7fd-005056ae23aa',
-        "go_cc": '6722d74d-6e20-11ef-a7fd-005056ae23aa',
-        "hpa": '68c2f2c0-6e20-11ef-a7fd-005056ae23aa'
-    }
-]
+configs_file_path = "./configs/eval_hierarchy_configs.json"
+
+with open (configs_file_path, 'r') as f:
+    configs = json.load(f)
+
+for config in configs:
+    for k,v in config.items():
+        if k.endswith("_run_id") and (not v or len(v.strip()) < 1):
+            raise Exception(f"'{k}' needs to be provided")
+        
+#configs = [
+#    {
+#        "hierarchy_run_id": "30271acce96a42adae3c41c9c4f6a5b1",
+#        "max_fdr": 0.05,
+#        "min_jaccard_index": 0.1,
+#        "min_comp_size": 4,
+#        "corum": '633291aa-6e1d-11ef-a7fd-005056ae23aa',
+#        "go_cc": '6722d74d-6e20-11ef-a7fd-005056ae23aa',
+#        "hpa": '68c2f2c0-6e20-11ef-a7fd-005056ae23aa'
+#    },
+#    {
+#        "hierarchy_run_id": "fc69f8fb0697459284b23aa931501c91",
+#        "max_fdr": 0.05,
+#        "min_jaccard_index": 0.1,
+#        "min_comp_size": 4,
+#        "corum": '633291aa-6e1d-11ef-a7fd-005056ae23aa',
+#        "go_cc": '6722d74d-6e20-11ef-a7fd-005056ae23aa',
+#        "hpa": '68c2f2c0-6e20-11ef-a7fd-005056ae23aa'
+#    }
+#]
 
 with mlflow.start_run() as parent_run:
     mlflow.set_tag("pipeline_step", "cellmaps_hierarchyeval_parent")

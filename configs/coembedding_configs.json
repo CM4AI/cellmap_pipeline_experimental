@@ -1,4 +1,5 @@
-muse_config = {
+[
+    {
     "img_embed_run_id": "e49c82a296e64bb4a86512d2ec90c728",
     "ppi_embed_run_id": "2b99dbc7f29a4ad8a489711c60179416",
     "algorithm": "muse",
@@ -9,9 +10,9 @@ muse_config = {
     "triplet_margin": 0.1,
     "n_epochs_init": 100,
     "k": 10
-}
+    },
 
-pgps_config = {
+    {
     "img_embed_run_id": "e49c82a296e64bb4a86512d2ec90c728",
     "ppi_embed_run_id": "2b99dbc7f29a4ad8a489711c60179416",
     "algorithm": "proteingps",
@@ -20,14 +21,15 @@ pgps_config = {
     "jackknife_percent": 0.0,
     "dropout": 0.5,
     "triplet_margin": 0.2,
-    "l2_norm": False,
+    "l2_norm": false,
     "lambda_triplet": 1.0,
-    "mean_losses": False,
+    "mean_losses": false,
     "batch_size": 16,
     "lambda_reconstruction": 1.0,
     "lambda_l2": 0.001,
     "learn_rate": 1e-4,
     "hidden_size_1": 512,
     "hidden_size_2": 256,
-    "negative_from_batch": False
-}
+    "negative_from_batch": false
+    }
+]

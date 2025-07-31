@@ -1,4 +1,5 @@
 import os
+import json
 
 import mlflow
 from mlops_helper import get_run_uri, log_artifact_directory
@@ -15,41 +16,52 @@ ml_logger = LoggerFactory.get_logger("mlflow")
 
 base_path = "data/embedding"
 
-muse_config = {
-    "img_embed_run_id": "e49c82a296e64bb4a86512d2ec90c728",
-    "ppi_embed_run_id": "2b99dbc7f29a4ad8a489711c60179416",
-    "algorithm": "muse",
-    "latent_dimensions": 128,
-    "n_epochs": 100,
-    "jackknife_percent": 0.0,
-    "dropout": 0.5,
-    "triplet_margin": 0.1,
-    "n_epochs_init": 100,
-    "k": 10
-}
+configs_file_path = "./configs/coembedding_configs.json"
 
-pgps_config = {
-    "img_embed_run_id": "e49c82a296e64bb4a86512d2ec90c728",
-    "ppi_embed_run_id": "2b99dbc7f29a4ad8a489711c60179416",
-    "algorithm": "proteingps",
-    "latent_dimensions": 128,
-    "n_epochs": 100,
-    "jackknife_percent": 0.0,
-    "dropout": 0.5,
-    "triplet_margin": 0.2,
-    "l2_norm": False,
-    "lambda_triplet": 1.0,
-    "mean_losses": False,
-    "batch_size": 16,
-    "lambda_reconstruction": 1.0,
-    "lambda_l2": 0.001,
-    "learn_rate": 1e-4,
-    "hidden_size_1": 512,
-    "hidden_size_2": 256,
-    "negative_from_batch": False
-}
+with open (configs_file_path, 'r') as f:
+    configs = json.load(f)
 
-configs = [muse_config, pgps_config]
+for config in configs:
+    algorithm = config.get("algorithm", "Unknown")
+    for k,v in config.items():
+        if k.endswith("_run_id") and (not v or len(v.strip()) < 1):
+            raise Exception(f"'{k}' for {algorithm} algorithm needs to be provided")
+
+#muse_config = {
+#    "img_embed_run_id": "e49c82a296e64bb4a86512d2ec90c728",
+#    "ppi_embed_run_id": "2b99dbc7f29a4ad8a489711c60179416",
+#    "algorithm": "muse",
+#    "latent_dimensions": 128,
+#    "n_epochs": 100,
+#    "jackknife_percent": 0.0,
+#    "dropout": 0.5,
+#    "triplet_margin": 0.1,
+#    "n_epochs_init": 100,
+#    "k": 10
+#}
+
+#pgps_config = {
+#    "img_embed_run_id": "e49c82a296e64bb4a86512d2ec90c728",
+#    "ppi_embed_run_id": "2b99dbc7f29a4ad8a489711c60179416",
+#    "algorithm": "proteingps",
+#    "latent_dimensions": 128,
+#    "n_epochs": 100,
+#    "jackknife_percent": 0.0,
+#    "dropout": 0.5,
+#    "triplet_margin": 0.2,
+#    "l2_norm": False,
+#    "lambda_triplet": 1.0,
+#    "mean_losses": False,
+#    "batch_size": 16,
+#    "lambda_reconstruction": 1.0,
+#    "lambda_l2": 0.001,
+#    "learn_rate": 1e-4,
+#    "hidden_size_1": 512,
+#    "hidden_size_2": 256,
+#    "negative_from_batch": False
+#}
+
+#configs = [muse_config, pgps_config]
 
 with mlflow.start_run() as parent_run:
     mlflow.set_tag("pipeline_step", "cellmaps_coembedding_parent")

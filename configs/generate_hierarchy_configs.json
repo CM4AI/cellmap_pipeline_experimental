@@ -1,26 +1,28 @@
-{
-    "coembed_run_id": "9ddae4cca39c4a08a9ba8f2d656f3ad8",
-    "algorithm": "leiden",
-    "k": 10,
-    "maxres": 80,
-    "containment_threshold": 0.75,
-    "jaccard_threshold": 0.9,
-    "min_diff": 1,
-    "min_system_size": 4,
-    "ppi_cutoffs": [0.001, 0.002, 0.003],
-    "parent_ppi_cutoff": 0.1,
-    "bootstrap_edges": 0
-},
-{
-    "coembed_run_id": "f7c8af16269b4404905a58bf2be7ceb4",
-    "algorithm": "leiden",
-    "k": 10,
-    "maxres": 80,
-    "containment_threshold": 0.75,
-    "jaccard_threshold": 0.9,
-    "min_diff": 1,
-    "min_system_size": 4,
-    "ppi_cutoffs": [0.001, 0.002, 0.003],
-    "parent_ppi_cutoff": 0.1,
-    "bootstrap_edges": 0
-}
+[
+    {
+        "coembed_run_id": "9ddae4cca39c4a08a9ba8f2d656f3ad8",
+        "algorithm": "leiden",
+        "k": 10,
+        "maxres": 80,
+        "containment_threshold": 0.75,
+        "jaccard_threshold": 0.9,
+        "min_diff": 1,
+        "min_system_size": 4,
+        "ppi_cutoffs": [0.001, 0.002, 0.003],
+        "parent_ppi_cutoff": 0.1,
+        "bootstrap_edges": 0
+    },
+    {
+        "coembed_run_id": "f7c8af16269b4404905a58bf2be7ceb4",
+        "algorithm": "leiden",
+        "k": 10,
+        "maxres": 80,
+        "containment_threshold": 0.75,
+        "jaccard_threshold": 0.9,
+        "min_diff": 1,
+        "min_system_size": 4,
+        "ppi_cutoffs": [0.001, 0.002, 0.003],
+        "parent_ppi_cutoff": 0.1,
+        "bootstrap_edges": 0
+    }
+]
