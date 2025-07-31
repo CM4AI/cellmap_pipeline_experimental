@@ -1,7 +1,7 @@
 [
     {
-    "img_embed_run_id": "e49c82a296e64bb4a86512d2ec90c728",
-    "ppi_embed_run_id": "2b99dbc7f29a4ad8a489711c60179416",
+    "img_embed_run_id": "",
+    "ppi_embed_run_id": "",
     "algorithm": "muse",
     "latent_dimensions": 128,
     "n_epochs": 100,
@@ -13,8 +13,8 @@
     },
 
     {
-    "img_embed_run_id": "e49c82a296e64bb4a86512d2ec90c728",
-    "ppi_embed_run_id": "2b99dbc7f29a4ad8a489711c60179416",
+    "img_embed_run_id": "",
+    "ppi_embed_run_id": "",
     "algorithm": "proteingps",
     "latent_dimensions": 128,
     "n_epochs": 100,

@@ -1,6 +1,6 @@
 {
-    "image_downloader_run_id": "7c7a02c77dca43d4b411ecb4415730b1",
-    "dimensions": "USE_DEFAULT_DIMENSIONS",
-    "fold": "USE_DEFAULT_FOLD",
+    "image_downloader_run_id": "",
+    "dimensions": "1024",
+    "fold": "1",
     "embedding_model": "https://github.com/CellProfiling/densenet/releases/download/v0.1.0/external_crop512_focal_slov_hardlog_class_densenet121_dropout_i768_aug2_5folds_fold0_final.pth"
 }
