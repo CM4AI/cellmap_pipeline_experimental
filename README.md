@@ -54,7 +54,7 @@ python src/download_ppi_data.py
 python src/download_image_data.py
 ```
 3. Get PPI and image downloader runIDs from MLFlow and add to configs/embed_ppi_configs.json and configs/embed_image_configs.json
-    1) configs/embed_ppi_configs.json
+    1. configs/embed_ppi_configs.json
     ```
     {
         "ppi_downloader_run_id": "",
@@ -71,7 +71,7 @@ python src/download_image_data.py
         "epochs": 1
     }
     ```
-    2) configs/embed_image_configs.json
+    2. configs/embed_image_configs.json
     ```
     {
     "image_downloader_run_id": "IMG_DOWNLOADER_RUN_ID",
