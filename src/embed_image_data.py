@@ -13,7 +13,7 @@ from fairops.mlops.autolog import LoggerFactory
 mlflow.set_experiment("image_embedding")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
-configs_file_path = './configs/embed_image_configs.json'
+configs_file_path = "./configs/embed_image_configs.json"
 
 configs = []
 with open (configs_file_path, 'r') as f:
