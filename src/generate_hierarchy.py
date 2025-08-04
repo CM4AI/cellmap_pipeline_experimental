@@ -1,4 +1,5 @@
 import os
+import json
 
 import mlflow
 from mlops_helper import get_run_uri, log_artifact_directory
@@ -14,34 +15,15 @@ from fairops.mlops.autolog import LoggerFactory
 mlflow.set_experiment("hierarchy")
 ml_logger = LoggerFactory.get_logger("mlflow")
 
-configs = [
-    {
-        "coembed_run_id": "9ddae4cca39c4a08a9ba8f2d656f3ad8",
-        "algorithm": "leiden",
-        "k": 10,
-        "maxres": 80,
-        "containment_threshold": 0.75,
-        "jaccard_threshold": 0.9,
-        "min_diff": 1,
-        "min_system_size": 4,
-        "ppi_cutoffs": [0.001, 0.002, 0.003],
-        "parent_ppi_cutoff": 0.1,
-        "bootstrap_edges": 0
-    },
-    {
-        "coembed_run_id": "f7c8af16269b4404905a58bf2be7ceb4",
-        "algorithm": "leiden",
-        "k": 10,
-        "maxres": 80,
-        "containment_threshold": 0.75,
-        "jaccard_threshold": 0.9,
-        "min_diff": 1,
-        "min_system_size": 4,
-        "ppi_cutoffs": [0.001, 0.002, 0.003],
-        "parent_ppi_cutoff": 0.1,
-        "bootstrap_edges": 0
-    }
-]
+configs_file_path = "./configs/generate_hierarchy_configs.json"
+
+with open (configs_file_path, 'r') as f:
+    configs = json.load(f)
+
+for config in configs:
+    for k,v in config.items():
+        if k.endswith("_run_id") and (not v or len(v.strip()) < 1):
+            raise Exception(f"'{k}' needs to be provided")
 
 with mlflow.start_run() as parent_run:
     mlflow.set_tag("pipeline_step", "cellmaps_generate_hierarchy_parent")

@@ -1,0 +1,35 @@
+[
+    {
+    "img_embed_run_id": "",
+    "ppi_embed_run_id": "",
+    "algorithm": "muse",
+    "latent_dimensions": 128,
+    "n_epochs": 100,
+    "jackknife_percent": 0.0,
+    "dropout": 0.5,
+    "triplet_margin": 0.1,
+    "n_epochs_init": 100,
+    "k": 10
+    },
+
+    {
+    "img_embed_run_id": "",
+    "ppi_embed_run_id": "",
+    "algorithm": "proteingps",
+    "latent_dimensions": 128,
+    "n_epochs": 100,
+    "jackknife_percent": 0.0,
+    "dropout": 0.5,
+    "triplet_margin": 0.2,
+    "l2_norm": false,
+    "lambda_triplet": 1.0,
+    "mean_losses": false,
+    "batch_size": 16,
+    "lambda_reconstruction": 1.0,
+    "lambda_l2": 0.001,
+    "learn_rate": 1e-4,
+    "hidden_size_1": 512,
+    "hidden_size_2": 256,
+    "negative_from_batch": false
+    }
+]
