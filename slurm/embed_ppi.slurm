@@ -7,7 +7,7 @@
 #SBATCH --ntasks=1
 #SBATCH --time=01:00:00
 
-soource ~/.bashrc
+source ~/.bashrc
 conda activate cellmaps_dev
 
 python src/embed_ppi_data.py
